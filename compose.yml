@@ -2,7 +2,7 @@ services:
   image-packer:
     build:
       context: .
-    image: tuxig/image-pack-webserver:local
+    image: ghcr.io/tuxig/image-pack-webserver:latest
     restart: unless-stopped
     environment:
       LISTEN_ADDR: ":8080"
