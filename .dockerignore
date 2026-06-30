@@ -1,0 +1,6 @@
+.git
+.github
+data
+*.tgz
+*.tar
+tmp
