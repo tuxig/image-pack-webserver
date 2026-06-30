@@ -43,7 +43,7 @@ const (
 	statusRunning           = "running"
 	statusReady             = "ready"
 	statusFailed            = "failed"
-	cacheExtension          = ".tgz"
+	cacheExtension          = ".tar"
 	authFingerprintAnonPart = "anonymous"
 )
 
