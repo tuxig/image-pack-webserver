@@ -1,0 +1,32 @@
+services:
+  image-packer:
+    build:
+      context: .
+    image: tuxig/image-pack-webserver:local
+    restart: unless-stopped
+    environment:
+      LISTEN_ADDR: ":8080"
+      DATA_DIR: /data
+      PUBLIC_BASE_URL: "${PUBLIC_BASE_URL:-}"
+      BASIC_AUTH_USER: "${BASIC_AUTH_USER:-}"
+      BASIC_AUTH_PASSWORD: "${BASIC_AUTH_PASSWORD:-}"
+      CACHE_TTL: "${CACHE_TTL:-24h}"
+      JOB_TTL: "${JOB_TTL:-24h}"
+      CLEANUP_INTERVAL: "${CLEANUP_INTERVAL:-15m}"
+      REQUEST_TIMEOUT: "${REQUEST_TIMEOUT:-45m}"
+      MAX_CONCURRENT_DOWNLOADS: "${MAX_CONCURRENT_DOWNLOADS:-2}"
+    volumes:
+      - image-packer-data:/data
+    ports:
+      - "${IMAGE_PACKER_PORT:-8080}:8080"
+    expose:
+      - "8080"
+    healthcheck:
+      test: ["CMD", "/image-packer", "--healthcheck"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  image-packer-data:
